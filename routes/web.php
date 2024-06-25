@@ -6,6 +6,8 @@ use App\Providers\RouteServiceProvider;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\HighscoreController;
+
 
 
 
@@ -26,3 +28,5 @@ Route::group(['middleware' => ['prevent-back-history']],function(){
     Route::get('/logout', [AuthController::class, 'logout'])->middleware('auth');
     Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth')->name('logout');
 });
+
+Route::middleware('auth')->get('/highscore', [HighscoreController::class, 'getHighscore'])->name('highscore');

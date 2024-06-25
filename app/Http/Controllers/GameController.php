@@ -14,6 +14,20 @@ class GameController extends Controller
         return view('game.game');
     }
 
+    public function tamat()
+    {
+        // Simpan highscore ke database
+        if (Auth::check()) {
+            $user_id = Auth::id();
+            $totalScore = $this->totalScore; // Misalnya nilai highscore yang ingin disimpan
+            
+            // Cari atau buat entri highscore untuk pengguna saat ini
+            $highscore = Highscore::updateOrCreate(
+                ['user_id' => $user_id],
+                ['highscore' => $totalScore]
+            );
+        }
+    }
     /**
      * Show the form for creating a new resource.
      */

@@ -26,18 +26,6 @@
     <script src="src/game.js"></script>
   </head>
   <body>
-    <div class="navbar">
-          <a href="#">
-                  <img src="assets/logo.png" alt="LOGO" style="height: 50px;">
-              </a>
-          <a href="#game">Permainan</a> <!-- Link ke #game -->
-          <a href="#about">About us</a> <!-- Link ke #about -->
-          <a href="#leaderboard">Leaderboard</a> <!-- Link ke #leaderboard -->
-          <a href="{{ url('/logout') }}" class="logout">logout</a>
-      </div>
-      <div class="main">
-          @yield('content')
-      </div>
     <div id="gameContainer"></div>
     <script src="{{ asset('js/phaser.min.js') }}"></script>
     <script src="{{ asset('js/game.js') }}"></script>
