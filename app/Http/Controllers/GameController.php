@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Score;
+
 
 class GameController extends Controller
 {
@@ -14,20 +16,26 @@ class GameController extends Controller
         return view('game.game');
     }
 
-    public function tamat()
+    public function saveScore(Request $request)
     {
-        // Simpan highscore ke database
-        if (Auth::check()) {
-            $user_id = Auth::id();
-            $totalScore = $this->totalScore; // Misalnya nilai highscore yang ingin disimpan
-            
-            // Cari atau buat entri highscore untuk pengguna saat ini
-            $highscore = Highscore::updateOrCreate(
-                ['user_id' => $user_id],
-                ['highscore' => $totalScore]
-            );
-        }
+        $request->validate([
+            'score' => 'required|integer',
+        ]);
+
+        $score = new Score();
+        $score->skor = $request->score;
+        $score->user_id = auth()->user()->id;
+        $score->save();
+
+        return response()->json(['message' => 'Score saved successfully']);
     }
+
+    public function leaderboard()
+    {
+        $scores = Score::with('user')->orderBy('skor', 'desc')->take(10)->get();
+        return view('leaderboard.leaderboard', ['scores' => $scores]);
+    }
+
     /**
      * Show the form for creating a new resource.
      */

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -56,9 +56,9 @@
             <img src="assets/logo.png" alt="LOGO" style="height: 50px;">
         </a>
         <div class="menu-right">
-            <a href="#game">Permainan</a> <!-- Link ke #game -->
-            <a href="#about">About us</a> <!-- Link ke #about -->
-            <a href="#leaderboard">Leaderboard</a> <!-- Link ke #leaderboard -->
+            <a href="#game">Permainan</a> 
+            <a href="#about">About us</a> 
+            <a href="#leaderboard">Leaderboard</a>
             <a href="{{ url('/login') }}" class="login">Login</a>
             <a href="{{ url('/register') }}" class="register">Register</a>
         </div>
@@ -67,4 +67,4 @@
         @yield('content')
     </div>
 </body>
-</html>
+</html> -->

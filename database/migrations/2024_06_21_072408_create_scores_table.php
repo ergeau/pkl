@@ -12,11 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('scores', function (Blueprint $table) {
-            $table->string('idSkor');
+            $table->increments('idSkor'); // Menggunakan increments untuk primary key
             $table->string('skor');
+            $table->unsignedInteger('user_id'); // Menambahkan kolom user_id sebagai foreign key
             $table->timestamps();
-            $table->unique(['idSkor']);
-            $table->foreign('idSkor')->references('id')->on('users')->onDelete('cascade');
+            
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade'); // Membuat foreign key
         });
     }
 

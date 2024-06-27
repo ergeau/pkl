@@ -68,9 +68,6 @@ var config = {
   }
   
   function create() {
-
-    var highscore = localStorage.getItem("highscore") || 0;
-
     // Inisialisasi properti game
     this.totalScore = 0;
     this.daun = null;
@@ -215,11 +212,6 @@ var config = {
         fill: "#000000",
     });
     this.textTotalScore = this.add.text(X_POSITION.CENTER - 200, 20, "Total Score: 0", {
-        font: "25px Arial",
-        fill: "#000000",
-    });
-
-    this.textHighScore = this.add.text(X_POSITION.CENTER + 200, 20, `High Score: ${highscore}`, {
         font: "25px Arial",
         fill: "#000000",
     });
@@ -416,22 +408,11 @@ var config = {
     // Fungsi untuk menangani jawaban yang benar
     this.benar = function () {
         this.totalScore += this.collectedLeavesCount;
+        sendScoreToServer(this.totalScore);
         this.textTotalScore.setText(`Total Score: ${this.totalScore}`);
         
         if (this.currentLevel === 5) {
             this.tamat();
-            
-            // Ambil highscore dari localStorage
-            var highscore = localStorage.getItem("highscore") || 0;
-            
-            // Bandingkan dengan totalScore saat ini
-            if (this.totalScore > highscore) {
-                // Jika totalScore lebih besar, update highscore di localStorage
-                localStorage.setItem("highscore", this.totalScore);
-                
-                // Perbarui teks highscore secara langsung
-                this.textHighScore.setText(`High Score: ${this.totalScore}`);
-            }
         } else {
             this.currentLevel++;
   
@@ -658,10 +639,6 @@ var config = {
     
     // Fungsi untuk menangani game tamat
     this.tamat = function () {
-
-        let highscore = localStorage["highscore"] || 0;
-
-
         for (let i = 0; i < btnArray.length; i++) {
             btnArray[i].setVisible(false);
         }
@@ -729,3 +706,18 @@ var config = {
       this.checkpoint();    // Jika ya, memanggil fungsi checkpoint
     }
   }
+  
+  function sendScoreToServer(score) {
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', '/save-score', true);
+    xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+    xhr.setRequestHeader('X-CSRF-TOKEN', document.querySelector('meta[name="csrf-token"]').getAttribute('content'));
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            console.log('Score saved successfully');
+        }
+    };
+    xhr.send(JSON.stringify({
+        score: score
+    }));
+}

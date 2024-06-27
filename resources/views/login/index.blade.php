@@ -1,68 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Login</title>
+    <link rel="shortcut icon" href="{{ asset('template/assets/compiled/svg/favicon.svg') }}" type="image/x-icon">
+    <link rel="stylesheet" href="{{ asset('template/assets/compiled/css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('template/assets/compiled/css/app-dark.css') }}">
+    <link rel="stylesheet" href="{{ asset('template/assets/compiled/css/auth.css') }}">
 </head>
-<style>
-    body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-}
 
-.login-container {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 300px;
-}
+<body>
+    <script src="{{ asset('template/assets/static/js/initTheme.js') }}"></script>
+    <div id="auth">
+        <div class="row h-100">
+            <div class="col-lg-5 col-12">
+                <div id="auth-left">
+                    <div class="auth-logo">
+                        <a href="/login"><img src="assets/logo2.png" alt="Logo" style="width: 70px; height: 70px;"></a>
+                    </div>
+                    <h1 class="auth-title">Login.</h1>
+                    <p class="auth-subtitle mb-5">Login untuk bermain :D</p>
 
-h2 {
-    margin-bottom: 20px;
-    color: #333;
-    text-align: center;
-}
+                    <form action="/login" method="post">
+                        @csrf
+                        <div class="form-group position-relative has-icon-left mb-4">
+                            <input type="text" class="form-control form-control-xl" id="identifier" name="identifier" placeholder="Username or Email" required>
+                            <div class="form-control-icon">
+                                <i class="bi bi-person"></i>
+                            </div>
+                        </div>
+                        <div class="form-group position-relative has-icon-left mb-4">
+                            <input type="password" class="form-control form-control-xl" id="password" name="password" placeholder="Password" required>
+                            <div class="form-control-icon">
+                                <i class="bi bi-shield-lock"></i>
+                            </div>
+                        </div>
 
-.input-group {
-    margin-bottom: 15px;
-}
+                        <button type="submit" class="btn btn-primary btn-block btn-lg shadow-lg mt-5">Log in</button>
+                    </form>
 
-.input-group label {
-    display: block;
-    margin-bottom: 5px;
-    color: #333;
-}
+                </div>
+            </div>
+            <div class="col-lg-7 d-none d-lg-block">
+                <div id="auth-right" class="d-flex justify-content-center align-items-center position-relative" style="height: 100vh; background: url('assets/mainan.png') repeat;">
+                    <div class="overlay position-absolute w-100 h-100" style="background-color: rgba(0, 0, 50, 0.5);"></div>
+                    <div class="content position-relative text-white" style="z-index: 1;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
 
-.input-group input {
-    width: calc(100% - 20px);
-    padding: 8px 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
+</html>
 
-button {
-    width: 100%;
-    padding: 10px;
-    background-color: #007BFF;
-    border: none;
-    border-radius: 4px;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #0056b3;
-}
-</style>
+<!-- </style>
 <body>
     <div class="login-container">
         <h2>Login</h2>
@@ -80,4 +74,4 @@ button:hover {
     </form>
     </div>
 </body>
-</html>
+</html> -->
