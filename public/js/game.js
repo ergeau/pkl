@@ -87,9 +87,11 @@ var config = {
     var snd_benar = this.sound.add('benar');
     var snd_salah = this.sound.add('salah');
     var snd_get = this.sound.add('get');
-  
     this.collectedLeavesCount = 0;
     const canvasHeight = game.canvas.height;
+    isSwingingLeft = true;
+    this.leafContainers = [];
+    this.fallenLeaves = [];
   
     // Konstanta untuk penataan tombol
     const numLeafContainers = 5;
@@ -97,12 +99,7 @@ var config = {
     const boxHeight = 100;
     const spacing = 0;
     const buttonSpacing = 100;
-  
-    isSwingingLeft = true;
-  
-    this.leafContainers = [];
-    this.fallenLeaves = [];
-  
+
     X_POSITION = { LEFT: 0, CENTER: game.canvas.width / 2, RIGHT: game.canvas.width };
     Y_POSITION = { TOP: 0, CENTER: game.canvas.height / 2, BOTTOM: game.canvas.height };
   
@@ -707,17 +704,17 @@ var config = {
     }
   }
   
-  function sendScoreToServer(score) {
-    const xhr = new XMLHttpRequest();
-    xhr.open('POST', '/save-score', true);
-    xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-    xhr.setRequestHeader('X-CSRF-TOKEN', document.querySelector('meta[name="csrf-token"]').getAttribute('content'));
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            console.log('Score saved successfully');
-        }
-    };
-    xhr.send(JSON.stringify({
-        score: score
-    }));
-}
+//   function sendScoreToServer(score) {
+//     const xhr = new XMLHttpRequest();
+//     xhr.open('POST', '/save-score', true);
+//     xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+//     xhr.setRequestHeader('X-CSRF-TOKEN', document.querySelector('meta[name="csrf-token"]').getAttribute('content'));
+//     xhr.onreadystatechange = function() {
+//         if (xhr.readyState === 4 && xhr.status === 200) {
+//             console.log('Score saved successfully');
+//         }
+//     };
+//     xhr.send(JSON.stringify({
+//         score: score
+//     }));
+// }
