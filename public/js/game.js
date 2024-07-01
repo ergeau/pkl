@@ -405,7 +405,7 @@ var config = {
     // Fungsi untuk menangani jawaban yang benar
     this.benar = function () {
         this.totalScore += this.collectedLeavesCount;
-        sendScoreToServer(this.totalScore);
+        // sendScoreToServer(this.totalScore);
         this.textTotalScore.setText(`Total Score: ${this.totalScore}`);
         
         if (this.currentLevel === 5) {
