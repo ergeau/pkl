@@ -405,7 +405,11 @@ var config = {
     // Fungsi untuk menangani jawaban yang benar
     this.benar = function () {
         this.totalScore += this.collectedLeavesCount;
-        // sendScoreToServer(this.totalScore);
+        
+        // save to server
+        sendScoreToServer(this.totalScore);
+
+
         this.textTotalScore.setText(`Total Score: ${this.totalScore}`);
         
         if (this.currentLevel === 5) {
@@ -704,17 +708,13 @@ var config = {
     }
   }
   
-//   function sendScoreToServer(score) {
-//     const xhr = new XMLHttpRequest();
-//     xhr.open('POST', '/save-score', true);
-//     xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-//     xhr.setRequestHeader('X-CSRF-TOKEN', document.querySelector('meta[name="csrf-token"]').getAttribute('content'));
-//     xhr.onreadystatechange = function() {
-//         if (xhr.readyState === 4 && xhr.status === 200) {
-//             console.log('Score saved successfully');
-//         }
-//     };
-//     xhr.send(JSON.stringify({
-//         score: score
-//     }));
-// }
+  function sendScoreToServer(score) {
+    // use javascript fetch
+    fetch('http://localhost:8000/api/save-score', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ score: score }),
+    })
+  }

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Highscore;
 use Illuminate\Http\Request;
 use App\Models\Score;
+use PHPUnit\Runner\ErrorException;
 
 
 class GameController extends Controller
@@ -13,21 +15,43 @@ class GameController extends Controller
      */
     public function index()
     {
-        return view('game.game');
+        try {
+            return view('game.game');
+        }catch (ErrorException $err){
+            dump($err->getMessage());
+        }
     }
 
     public function saveScore(Request $request)
     {
-        $request->validate([
-            'score' => 'required|integer',
-        ]);
+        try {
+            $request->validate([
+                'score' => 'required|integer',
+            ]);
 
-        $score = new Score();
-        $score->skor = $request->score;
-        $score->user_id = auth()->user()->id;
-        $score->save();
+            $score = new Score();
+            $score->skor = $request->score;
+            $score->user_id = 1;
+            $score->save();
 
-        return response()->json(['message' => 'Score saved successfully']);
+            // save highest score, if highscore with id 1 not found create new highscore
+            $highscore = Highscore::find(1);
+            if ($highscore == null) {
+                $highscore = new Highscore();
+                $highscore->id = 1;
+                $highscore->score = $request->score;
+                $highscore->save();
+            } else {
+                if ($highscore->score < $request->score) {
+                    $highscore->score = $request->score;
+                    $highscore->save();
+                }
+            }
+
+            return response()->json(['success' => true,'code' => 200,'message' => 'Score saved successfully']);
+        }catch (ErrorException $err){
+            dump($err->getMessage());
+        }
     }
 
     public function leaderboard()
