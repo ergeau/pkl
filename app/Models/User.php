@@ -45,4 +45,10 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function scores()
+    {
+        return $this->hasMany(Score::class, 'user_id');
+    }
+
 }

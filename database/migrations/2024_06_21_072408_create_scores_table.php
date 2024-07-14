@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('skor');
             $table->unsignedInteger('user_id'); // Menambahkan kolom user_id sebagai foreign key
             $table->timestamps();
-            
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade'); // Membuat foreign key
         });
     }

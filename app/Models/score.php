@@ -8,9 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Score extends Model
 {
     use HasFactory;
-    protected $fillable = [
-        'skor', 'user_id'
-    ];
+
+    protected $fillable = ['skor', 'user_id'];
 
     public function user()
     {

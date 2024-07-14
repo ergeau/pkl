@@ -2,17 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Score;
-
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class LeaderboardController extends Controller
 {
     public function index()
     {
-        $leaderboard = Score::with('user')->orderBy('skor', 'desc')->get();
+        // Fetch the scores along with the user who achieved them, ordered by created_at in descending order
+        $leaderboard = Score::with('user')->orderBy('created_at', 'asc')->get();
 
-        return view('leaderboard.leaderboard', compact('leaderboard'));
+        // Pass the leaderboard data to the view
+        return view('leaderboard/leaderboard', compact('leaderboard'));
     }
 
 

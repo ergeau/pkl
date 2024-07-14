@@ -34,6 +34,6 @@ Route::group(['middleware' => ['prevent-back-history']],function(){
 });
 
 Route::post('/save-score', [GameController::class, 'saveScore'])->middleware('auth');
-Route::get('/leaderboard', [GameController::class, 'leaderboard'])->middleware('auth');
+Route::get('/leaderboard', [LeaderboardController::class, 'index'])->middleware('auth');
 
 Route::middleware('auth')->get('/highscore', [HighscoreController::class, 'getHighscore'])->name('highscore');

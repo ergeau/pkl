@@ -27,11 +27,6 @@
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
-        .content {
-            margin: 0 auto;
-            padding: 20px;
-            text-align: justify;
-        }
         table {
             width: 100%;
             border-collapse: collapse;
@@ -50,23 +45,25 @@
     </style>
 </head>
 <body>
-    <table>
-        <thead>
-            <tr>
-                <th>Nama</th>
-                <th>Skor</th>
-                <th>Waktu</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- @foreach ($leaderboard as $score) -->
-                <!-- <tr>
-                    <td>{{ $score->user->nama }}</td>
-                    <td>{{ $score->skor }}</td>
-                    <td>{{ $score->created_at }}</td>
+    <div class="container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Nama</th>
+                    <th>Skor</th>
+                    <th>Waktu</th>
                 </tr>
-            @endforeach -->
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach ($leaderboard as $score)
+                    <tr>
+                        <td>{{ $score->user->nama }}</td> <!-- Assuming 'name' is the column in 'users' table -->
+                        <td>{{ $score->skor }}</td>
+                        <td>{{ $score->created_at }}</td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>
