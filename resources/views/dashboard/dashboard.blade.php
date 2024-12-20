@@ -31,11 +31,17 @@
             margin: 50px;
             border-radius: 8px;
             text-align: center;
-
         }
         .menu-right {
             display: flex;
             gap: 20px; /* Jarak antar menu */
+        }
+        .about-paragraph {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            text-align: justify;
+            margin: 10px 20px;
+            color: #333;
         }
     </style>
     @yield('head')
